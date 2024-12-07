@@ -1,0 +1,41 @@
+.cont {
+  display: flex;
+  height: max-content;
+  width: 100%;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+  h2 {
+    user-select: none;
+    width: 20%;
+  }
+  button {
+    background-color: red;
+    font-size: 1.4rem;
+    border-radius: 0.25rem;
+    padding: 0.25rem 1rem 0.25rem 1rem;
+    cursor: pointer;
+  }
+}
+@keyframes animation {
+  0%,
+  30%,
+  70%,
+  100% {
+    scale: 1;
+  }
+  40% {
+    scale: 1.25;
+  }
+  50% {
+    scale: 1;
+  }
+  60% {
+    scale: 1.25;
+  }
+}
+center {
+  font-size: 3rem;
+  font-weight: 1rem;
+  animation: animation 3s infinite ease-in-out;
+}

@@ -1,15 +1,12 @@
 import css from "./subcomps.module.css";
-import { useContext } from "react";
-import { ItemArr } from "../../store/items-store";
 
-export default function Inp() {
-  let itemObj = useContext(ItemArr);
-  let inpData = itemObj.inpData;
+// eslint-disable-next-line react/prop-types
+export default function Inp({ inp }) {
   return (
     <input
       className={css.inputs}
       type="text"
-      ref={inpData}
+      ref={inp}
       placeholder="Enter Task"
     ></input>
   );

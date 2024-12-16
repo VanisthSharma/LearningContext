@@ -1,14 +1,11 @@
 import css from "./subcomps.module.css";
-import { useContext } from "react";
-import { ItemArr } from "../../store/items-store";
 
-export default function Date() {
-  let itemObj = useContext(ItemArr);
-  let dateInp = itemObj.dateInp;
+// eslint-disable-next-line react/prop-types
+export default function Date({ date }) {
   return (
     <input
       type="date"
-      ref={dateInp}
+      ref={date}
       className={css.inputs}
       placeholder="Enter Task"
     ></input>

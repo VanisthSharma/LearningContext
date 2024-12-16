@@ -1,25 +1,47 @@
-import { useRef, useState } from "react";
+import { useReducer } from "react";
 import Head from "./mainData/heading";
 import "./App.css";
 import { ItemArr } from "./store/items-store";
 import NewItems from "./mainData/newItems";
 
+const itemsReducer = (currItem, action) => {
+  let itemArr = currItem;
+  if (action.type === "NEW_ITEM") {
+    itemArr = [
+      ...itemArr,
+      {
+        task: action.payload.inp,
+        due: action.payload.date,
+        del: action.payload.del,
+      },
+    ];
+  } else if (action.type === "DELETE_ITEM") {
+    itemArr = itemArr.filter((_, x) => x !== action.payload.idx);
+  }
+  return itemArr;
+};
+
 function App() {
-  const inpData = useRef("");
-  const dateInp = useRef("");
-  const [itemArr, setitemArr] = useState([]);
-  const Addfunc = () => {
+  const [itemArr, dispatchItemArr] = useReducer(itemsReducer, []);
+  const Addfunc = (inp, date) => {
     let newObj = {
-      task: inpData.current.value,
-      due: dateInp.current.value,
-      delete: "Delete",
+      type: "NEW_ITEM",
+      payload: {
+        inp: inp.current.value,
+        date: date.current.value,
+        del: "Delete",
+      },
     };
-    let newArr = [...itemArr, newObj];
-    setitemArr(newArr);
+    dispatchItemArr(newObj);
   };
   const delFunc = (idx) => {
-    let newArr = itemArr.filter((_, x) => x !== idx);
-    setitemArr(newArr);
+    const newObj = {
+      type: "DELETE_ITEM",
+      payload: {
+        idx: idx,
+      },
+    };
+    dispatchItemArr(newObj);
   };
   return (
     <ItemArr.Provider
@@ -27,8 +49,6 @@ function App() {
         itemArr: itemArr,
         Addfunc: Addfunc,
         delFunc: delFunc,
-        inpData: inpData,
-        dateInp: dateInp,
       }}
     >
       <Head />

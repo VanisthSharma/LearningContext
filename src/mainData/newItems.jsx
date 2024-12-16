@@ -11,7 +11,7 @@ export default function NewItems() {
           <div className="cont" key={index}>
             <h2> {item.task} </h2>
             <h2> {item.due} </h2>
-            <button onClick={() => delFunc(index)}>{item.delete}</button>
+            <button onClick={() => delFunc(index)}>{item.del}</button>
           </div>
         ))
       ) : (
